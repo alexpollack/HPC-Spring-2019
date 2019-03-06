@@ -83,7 +83,7 @@ void f ( int n )
     cout << "  " << i << "  " << x[i] << "\n"; //invalide read of size 4, line 40
   }
 
-  free (x)//delete [] x; //mismatched free/delete, think it needs free because of malloc not new
+    free (x);//delete [] x; //mismatched free/delete, think it needs free because of malloc not new
 
   return;
 }
