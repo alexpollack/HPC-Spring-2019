@@ -78,7 +78,7 @@ void junk_data ( )
 //
 //  X = { 0, 1, 2, 3, 4, ?a, ?b, ?c, ?d, ?e }.
 //
-  for ( i = 0; i < 5; i++ )
+  for ( i = 0; i < 10; i++ ) // changed from for ( i = 0; i < 5; i++ ) to < 10
   {
     x[i] = i;
   }
@@ -101,8 +101,8 @@ void junk_data ( )
 //
   for ( i = 0; i < 10; i++ )
   {
-    cout << "  " << i << "  " << x[i] << "\n";
-  }
+    cout << "  " << i << "  " << x[i] << "\n"; //conditional jump/moves depend on unitialized values, line37
+  }//and use of unitialized values at 104
 
   delete [] x;
 
