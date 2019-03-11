@@ -34,7 +34,7 @@ float total;
   for (i=0; i<1000000; i++) 
      total = total + i*1.0;
 
-  printf ("Thread %d is done! Total= %e\n",tid,total);
+  printf ("Thread %d is done! Total= %e\n",omp_get_thread_num(),total);
 
   } /*** End of parallel region ***/
 }

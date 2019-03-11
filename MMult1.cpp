@@ -1,5 +1,6 @@
 // g++ -fopenmp -O3 -march=native MMult1.cpp && ./a.out
-
+//g++ -std=c++11 -O3 -march=native MMult1.cpp && ./a.out
+//g++ -std=c++11 -march=native -o -fopenmp MMult1.cpp && ./a.out
 #include <stdio.h>
 #include <math.h>
 #include <omp.h>
@@ -29,7 +30,7 @@ void MMult1(long m, long n, long k, double *a, double *b, double *c) {
   // TODO: See instructions below
     int chunk = 100;
     long j, p, i;
-#pragma omp parallel for shared(a,b,c,m,n,k,chunk) private(j,p,i)
+#pragma omp parallel private(j,p,i) shared(a,b,c,m,n,k,chunk)
     {
 #pragma omp for schedule (static, chunk)
         for (j = 0; j < n; j++)
