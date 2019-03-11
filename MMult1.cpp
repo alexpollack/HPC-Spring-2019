@@ -86,7 +86,8 @@ void MMult1(long m, long n, long k, double *a, double *b, double *c) {
     // TODO: See instructions below
     int chunk = 1000;
     double temp;
-#pragma omp parallel for default(none) shared(a,b,c,chunk) reduction(+:C_ij)
+        //omp_set_num_threads(4);
+    #pragma omp parallel for default(none) shared(a,b,c,chunk) reduction(+:C_ij)
     {
         #pragma omp for schedule(dynamic,chunk) nowait
         for ( int i=0; i<n; i+=BLOCK_SIZE ){
