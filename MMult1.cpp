@@ -25,7 +25,7 @@ void MMult0(long m, long n, long k, double *a, double *b, double *c) {
   }
 }
 
-//Matrix Mult with parrallel looping
+//Matrix Mult with parrallel looping//
 void MMult1(long m, long n, long k, double *a, double *b, double *c) {
   // TODO: See instructions below
     int chunk = 100;
@@ -50,31 +50,29 @@ void MMult1(long m, long n, long k, double *a, double *b, double *c) {
     }
 }
 /*
-//Matrix mult with blocking
+
+//Matrix mult with blocking//
 void MMult1(long m, long n, long k, double *a, double *b, double *c) {
     // TODO: See instructions below
     int chunk = 1;
     double temp;
-    long j,p,i,pp,ii;
-#pragma omp parallel for shared(a,b,c,m,n,k,chunk) private(j,p,i,pp,ii,temp)
+    //long j,p,i,pp,ii;
+    //long jj,kk,i,j,k;
+//#pragma omp parallel for shared(a,b,c,m,n,k,chunk) private(j,p,i,pp,ii,temp)
     {
-        #pragma omp for schedule (static, chunk)
-        for( pp = 0; pp < m; pp += BLOCK_SIZE)
-        {
-            for( ii = 0; ii< m; ii+= BLOCK_SIZE)
-            {
-                for ( j = 0; j < n; j++)
-                {
-                    for ( p = pp; ((pp + BLOCK_SIZE) > m ? m : (pp + BLOCK_SIZE)); p++)
-                    {
-                        temp = 0.0f;
-                        for ( i = ii; i < ((ii + BLOCK_SIZE) > m ? m : (ii + BLOCK_SIZE)); i++)
-                        {
-                            double A_ip = a[i+p*m];
-                            double B_pj = b[p+j*k];
-                            double C_ij = c[i+j*m];
-                            C_ij = C_ij + A_ip * B_pj;
-                            c[i+j*m] = C_ij;
+        for ( int i=0; i<n; i+=BLOCK_SIZE ){
+            for ( int j=0; j<n; j+=BLOCK_SIZE ){
+                for ( int K=0; K<n; K+=BLOCK_SIZE ){
+                    for ( int y=i; y<i+BLOCK_SIZE; y++ ){
+                        for ( int x=j; x<j+BLOCK_SIZE; x++ ){
+                            for ( int z=K; z<K+BLOCK_SIZE; z++ ){
+                                double A_ip = a[y+z*m];
+                                double B_pj = b[z+x*k];
+                                double C_ij = c[y+x*m];
+                                //C(y,x) += A(y,z)*B(z,x);
+                                C_ij = C_ij + A_ip * B_pj;
+                                c[y+x*m] = C_ij;
+                            }
                         }
                     }
                 }
@@ -82,6 +80,35 @@ void MMult1(long m, long n, long k, double *a, double *b, double *c) {
         }
     }
 }*/
+
+//Parellized Matrix mult with blocking//
+void MMult1(long m, long n, long k, double *a, double *b, double *c) {
+    // TODO: See instructions below
+    int chunk = 1000;
+    double temp;
+#pragma omp parallel for default(none) shared(a,b,c,chunk) reduction(+:C_ij)
+    {
+        #pragma omp for schedule(dynamic,chunk) nowait
+        for ( int i=0; i<n; i+=BLOCK_SIZE ){
+            for ( int j=0; j<n; j+=BLOCK_SIZE ){
+                for ( int K=0; K<n; K+=BLOCK_SIZE ){
+                    for ( int y=i; y<i+BLOCK_SIZE; y++ ){
+                        for ( int x=j; x<j+BLOCK_SIZE; x++ ){
+                            for ( int z=K; z<K+BLOCK_SIZE; z++ ){
+                                double A_ip = a[y+z*m];
+                                double B_pj = b[z+x*k];
+                                double C_ij = c[y+x*m];
+                                //C_ij = C_ij + A_ip * B_pj;
+                                C_ij += A_ip * B_pj;
+                                c[y+x*m] = C_ij;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 int main(int argc, char** argv) {
   const long PFIRST = BLOCK_SIZE;
