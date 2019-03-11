@@ -24,7 +24,7 @@ void MMult0(long m, long n, long k, double *a, double *b, double *c) {
     }
   }
 }
-
+/*
 //Matrix Mult with parrallel looping//
 void MMult1(long m, long n, long k, double *a, double *b, double *c) {
   // TODO: See instructions below
@@ -48,7 +48,7 @@ void MMult1(long m, long n, long k, double *a, double *b, double *c) {
             }
         }
     }
-}
+}*/
 /*
 
 //Matrix mult with blocking//
