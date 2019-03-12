@@ -77,10 +77,10 @@ void f ( int n )
   x[1] = 1;
   cout << "  " << 1 << "  " << x[1] << "\n";
 
-  for ( i = 2; i < n; i++ ) // **WAS <= n**, changed to be < n not <= n
+  for ( i = 2; i < n; i++ ) // **WAS <= n**, changed to be < n not <= n, went out of bounds -> bad access
   {
-    x[i] = x[i-1] + x[i-2]; //invalid write of size 4, by call at line 40
-    cout << "  " << i << "  " << x[i] << "\n"; //invalide read of size 4, line 40
+    x[i] = x[i-1] + x[i-2]; //invalid write of size 4, by call at line 40 because of bad acess
+    cout << "  " << i << "  " << x[i] << "\n"; //invalide read of size 4, line 40 because of bad access
   }
 
     free (x);//delete [] x; //mismatched free/delete, think it needs free because of malloc not new

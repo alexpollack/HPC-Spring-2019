@@ -3,11 +3,12 @@
 //g++ -std=c++11 -march=native -o -fopenmp MMult1.cpp && ./a.out
 #include <stdio.h>
 #include <math.h>
+#ifdef _OPENMP
 #include <omp.h>
+#endif
 #include "utils.h"
 
-#define BLOCK_SIZE 16
-
+#define BLOCK_SIZE 36 //    optimized block size 36
 // Note: matrices are stored in column major order; i.e. the array elements in
 // the (m x n) matrix C are stored in the sequence: {C_00, C_10, ..., C_m0,
 // C_01, C_11, ..., C_m1, C_02, ..., C_0n, C_1n, ..., C_mn}
@@ -86,10 +87,16 @@ void MMult1(long m, long n, long k, double *a, double *b, double *c) {
     // TODO: See instructions below
     int chunk = 1000;
     double temp;
-        //omp_set_num_threads(4);
+    #ifdef _OPENMP
+        omp_set_num_threads(4);
+    #endif
+    #ifdef _OPENMP
     #pragma omp parallel for default(none) shared(a,b,c,chunk) reduction(+:C_ij)
+    #endif
     {
+        #ifdef _OPENMP
         #pragma omp for schedule(dynamic,chunk) nowait
+        #endif
         for ( int i=0; i<n; i+=BLOCK_SIZE ){
             for ( int j=0; j<n; j+=BLOCK_SIZE ){
                 for ( int K=0; K<n; K+=BLOCK_SIZE ){
@@ -115,7 +122,7 @@ int main(int argc, char** argv) {
   const long PFIRST = BLOCK_SIZE;
   const long PLAST = 2000;
   const long PINC = std::max(50/BLOCK_SIZE,1) * BLOCK_SIZE; // multiple of BLOCK_SIZE
-
+    
   printf(" Dimension       Time    Gflop/s       GB/s        Error\n");
   for (long p = PFIRST; p < PLAST; p += PINC) {
     long m = p, n = p, k = p;

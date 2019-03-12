@@ -26,7 +26,7 @@ for (i=0; i<N; i++)
   if (tid == 0)
     {
     nthreads = omp_get_num_threads();
-    printf("Number of threads = %d\n", nthreads);
+    printf("Number of threads = %d\n", tid);
     }
 
   /*** Use barriers for clean output ***/

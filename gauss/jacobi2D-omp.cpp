@@ -8,12 +8,22 @@
 
 #include <iostream>
 #include <cmath>
+#ifdef _OPENMP
 #include <omp.h>
+#endif
 #include <math.h>
 #include <vector>
 #include "utils.h"
 
 using namespace std;
+/*
+#ifdef _OPENMP
+#pragma omp parallel
+{
+    omp_set_num_threads(4);
+    printf("hello from thread %d\n", omp_get_thread_num())
+}
+#endif*/
 
 int main()
 {
@@ -51,8 +61,12 @@ int main()
     int chunk = 1000;
     while(r/r0 > 1e-6)  //end method when residual has been reduced by 1e6 from first try
     {
+        #ifdef _OPENMP
         omp_set_num_threads(4);
+        #endif
+        #ifdef _OPENMP
         #pragma omp parallel for default(none) shared(uk,h,u,f,i,j,chunk) //reduction(+:C_ij)
+        #endif
         {
         for(i = 1; i < N; i ++)
         {

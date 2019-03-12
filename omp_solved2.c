@@ -25,7 +25,7 @@ float total;
     printf("Number of threads = %d\n", nthreads);
     }
 
-  #pragma omp barrier
+  #pragma omp barrier // thread number was overwriting by last thread to end
       printf("Thread %d is starting...\n",tid);
 #pragma omp barrier
   /* do some work */

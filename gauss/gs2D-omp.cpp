@@ -22,10 +22,10 @@ int main()
     cout << "Enter dimension N: ";  //input dimension size
     cin >> N;
     double h = 1/(N+1);
-    double f[N][N], u[N][N];
-    for(int i = 0; i <N; i++)//f(x) = 1
+    double f[N+1][N+1], u[N+1][N+1];
+    for(int i = 0; i <=N; i++)//f(x) = 1
     {
-        for(int j = 0; j < N; j++)
+        for(int j = 0; j <= N; j++)
         {
             f[i][j] = 1.0;
             u[i][j] = 0.0;  //initialize
@@ -34,62 +34,68 @@ int main()
     cout << "Gauss-Seidel Method:\n";
     int k = 0;
     Timer t;
-    double r = 1.0, r0= 1.0, sum = 0.0, uk1[N][N], resid[N];//,ublack[N][N],ured[N][N];
-    for(int i = 1; i < N; i ++)
+    double r = 1.0, r0= 1.0, sum = 0.0, uk1[N+1][N+1], resid[N+1];//,ublack[N][N],ured[N][N];
+    for(int i = 1; i <= N; i ++)
     {
         uk1[0][i]=0.0;
         uk1[i][0]=0.0;
         uk1[N][i]=1.0;
-        uk1[i][N]=1;
+        uk1[i][N]=1.0;
     }//Boundary conditions
     
     
     t.tic();
     int i,j;
     int chunk = 1000;
-    while(r/r0 > 1e-6)  //end method when residual has been reduced by 1e6 from first try
+    while(r > 1e-6)  //end method when residual has been reduced by 1e6 from first try
     {
-#pragma omp parallel for default(none) shared(uk,h,u,f,i,j,chunk) //reduction(+:C_ij)
+    #ifdef _OPENMP
+        omp_set_num_threads(4);
+    #endif
+
+    #ifdef _OPENMP
+        #pragma omp parallel for default(none) shared(uk,h,u,f,i,j,chunk) //reduction(+:C_ij)
+    #endif
         {
-            for(i = 1; i < N; i ++)
+            for(i = 1; i <= N; i ++)
             {
-                for(j=1; j < N; j++)
+                for(j=1; j <= N; j++)
                 {
-                    if(i+j % == 0)  //i+j is even, do red
+                    if(i+j % 2 == 0)  //i+j is even, do red
                         uk1[i][j] = 0.25 * (h*h*f[i][j] + u[i-1][j] +u[i][j-1]+u[i+1][j]+u[i][j+1]);
-                    else if(i+j % == 0) //i+j is odd, do black
+                    else if(i+j % 2 == 1) //i+j is odd, do black
                         uk1[i][j] = 0.25 * (h*h*f[i][j] + uk1[i-1][j] +uk1[i][j-1]+uk1[i+1][j]+uk1[i][j+1]);
                 }
             }
         }
-        for(i = 0; i < N; i++)
+        for(i = 0; i <=N; i++)
         {
-            for(int j = 0; j < N; j++)
+            for(int j = 0; j <=N; j++)
                 u[i][j] = uk1[i][j]; //u^k gets new u^k+1 value for future computations
         }
         sum = 0.0;
-        for (i = 0; i < N; i++)
+        for (i = 0; i <=N; i++)
         {
-            for(j=0;j<N;j++)
+            for(j=0;j<=N;j++)
                 sum = sum + pow((u[i][j] - f[i][j]),2);   //residual ||uk - f||
             resid[i] = sum;
             sum = 0.0;
         }
         sum = 0.0;
         //finish computing residual ||Auk - f||
-        for(int i = 0; i < N; i++)
+        for(int i = 0; i <=N; i++)
             sum = sum + resid[i];
         r = sqrt(sum);
         if(k == 1)
             r0 = r;
-        cout << k << "th iteration residual: " << r/r0 << endl;
+        cout << k << "th iteration residual: " << r << endl;
         if(k > 5000)    //break if exceeds 5000 iterations
         {
             cout << "\n!!Iteration count exceeded 5000!!\n";
             break;
         }
         k++;
-    
+    }
     return 0;
 }
     
