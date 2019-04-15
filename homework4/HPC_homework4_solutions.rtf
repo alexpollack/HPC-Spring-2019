@@ -1,0 +1,241 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 AndaleMono;\f2\fswiss\fcharset0 Helvetica-Bold;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;\red255\green255\blue255;
+\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c100000\c0;\cssrgb\c100000\c100000\c99926\c0;
+\cssrgb\c100000\c100000\c99926\c0;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Homework 4:\
+1) GPU dot product with CUDA:\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul \ulc0 Server: cuda1 (24 cores, 2.50 GHz)\ulnone \
+\ul CPU done Parallel, N = 1UL<<25, 
+\f1 \cf2 \cb3 \ulc2 \CocoaLigature0 Error = 0.000630
+\f0 \cf0 \cb1 \ulnone \CocoaLigature1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf2 \cb3 \CocoaLigature0 CPU Bandwidth = 13.111550 GB/s\
+GPU Bandwidth = 49.213397 GB/s\
+\
+\cb4 CPU Bandwidth = 16.434313 GB/s\
+GPU Bandwidth = 37.606415 GB/s\
+\
+CPU Bandwidth = 14.032904 GB/s\
+GPU Bandwidth = 62.549608 GB/s\
+\
+CPU Bandwidth = 15.546410 GB/s\
+GPU Bandwidth = 64.325932 GB/s\
+\
+CPU Bandwidth = 13.583285 GB/s\
+GPU Bandwidth = 33.821048 GB/s\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \ul \ulc0 \CocoaLigature1 Server: cuda2 (40 cores, 2.60 GHz), 
+\f1 \cf2 \cb3 \ulc2 \CocoaLigature0 Error = 0.000630\cb4 \ulnone \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \cb3 CPU Bandwidth = 11.042388 GB/s\
+GPU Bandwidth = 135.346793 GB/s\
+\
+CPU Bandwidth = 10.369208 GB/s\
+GPU Bandwidth = 138.456863 GB/s\
+\
+CPU Bandwidth = 10.127670 GB/s\
+GPU Bandwidth = 140.112762 GB/s\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \ul \ulc0 \CocoaLigature1 Server: cuda3 (48 cores, 2.30 GHz), 
+\f1 \cf2 \cb3 \ulc2 \CocoaLigature0 Error = 1.644934
+\f0 \cf0 \cb1 \ulnone \CocoaLigature1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf2 \cb3 \CocoaLigature0 CPU Bandwidth = 3.568472 GB/s\
+GPU Bandwidth = 11.427636 GB/s\
+\
+CPU Bandwidth = 3.783169 GB/s\
+GPU Bandwidth = 14.174358 GB/s\
+\
+CPU Bandwidth = 3.511621 GB/s\
+GPU Bandwidth = 16.794501 GB/s\
+\cb4 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f2\b \cf0 \cb1 \ul \ulc0 \CocoaLigature1 GPU Matrix Vector with CUDA:
+\f0\b0 \ulnone \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul Server: cuda1 (24 cores, 2.50 GHz)\ulnone \
+\ul CPU done Sequential, N = 1000:\ulnone \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf2 \cb4 \CocoaLigature0 	CPU Bandwidth = 0.002449 GB/s\
+	GPU Bandwidth = 0.003789 GB/s\
+	Error = 0.000000\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \ul \CocoaLigature1 CPU done Parallel, N = 1000:
+\f1 \cf2 \cb4 \ulnone \CocoaLigature0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 	CPU Bandwidth = 0.000002 GB/s\
+	GPU Bandwidth = 0.001572 GB/s\
+	Error = 0.273744\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf2 \cb3 \CocoaLigature0 	CPU Bandwidth = 0.000002 GB/s\
+	GPU Bandwidth = 0.001272 GB/s\
+	Error = 0.207146\
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul Server: cuda2 (40 cores , 2.60 GHz)\ulnone \
+\ul CPU done Sequential, N = 1000:\ulnone \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf2 \cb3 \CocoaLigature0 CPU Bandwidth = 0.001830 GB/s\
+GPU Bandwidth = 0.000975 GB/s\
+Error = 0.000000\
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \ul CPU done Parallel, N = 1000:\ulnone \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf2 \cb3 \CocoaLigature0 CPU Bandwidth = 0.000002 GB/s\
+GPU Bandwidth = 0.003467 GB/s\
+Error = 0.782968
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf2 \cb3 \CocoaLigature0 CPU Bandwidth = 0.000001 GB/s\
+GPU Bandwidth = 0.000838 GB/s\
+Error = 1.591390\
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf2 \cb4 \CocoaLigature0 CPU Bandwidth = 0.000001 GB/s\
+GPU Bandwidth = 0.000766 GB/s\
+Error = 1.591989
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\ul Server: cuda3 (48 cores, , 2.30 GHz)\ulnone \
+\ul CPU done Sequential, N = 1000:\ulnone \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf2 \cb3 \CocoaLigature0 CPU Bandwidth = 0.001880 GB/s\
+GPU Bandwidth = 0.000198 GB/s\
+Error = 0.000000
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\ul CPU done Parallel, N = 1000:\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf2 \cb3 \ulnone \CocoaLigature0 CPU Bandwidth = 0.000000 GB/s\
+GPU Bandwidth = 0.000395 GB/s\
+Error = 1.386422\
+\
+CPU Bandwidth = 0.000003 GB/s\
+GPU Bandwidth = 0.000608 GB/s\
+Error = 1.033738\
+\
+CPU Bandwidth = 0.000001 GB/s\
+GPU Bandwidth = 0.000618 GB/s\
+
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 2)\
+The error below is the error between the sum of the solution vectors for the CPU and GPC versions of the code.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f2\b \cf0 \ul 2D Jacobi method on GPC:\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\b0 \cf0 \ulnone Sum is the sum_ref of the solution vector in serial on the host after 100 iterations, sum is the solution vector using the CUDA on the device with the same.\
+\
+N = 500\
+\ul Server: cuda1 (24 cores, 2.50 GHz)\
+\
+\
+Server: cuda2 (40 cores , 2.60 GHz)\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf2 \cb5 \ulnone \CocoaLigature0 GPU Bandwidth = 0.002605 GB/s\
+Error = 0.021141\
+ sum_ref: 19.346367\
+ sum: 19.325225
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+N = 100\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf2 \cb3 \CocoaLigature0 GPU Bandwidth = 0.001728 GB/s\
+Error = 0.180845\
+ sum_ref: 16.872337\
+ sum: 16.691491\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0 \cf0 \cb1 \ul \ulc0 \CocoaLigature1 Server: cuda3 (48 cores, , 2.30 GHz)\
+\ulnone N= 500\ul \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf2 \cb3 \ulnone \CocoaLigature0 GPU Bandwidth = 0.005169 GB/s\
+Error = 0.025756\
+ sum_ref: 19.346367\
+ sum: 19.372123
+\f0 \cf0 \cb1 \ul \ulc0 \CocoaLigature1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\ulnone N = 100
+\f1 \cf2 \cb3 \CocoaLigature0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 GPU Bandwidth = 0.001737 GB/s\
+Error = 0.180845\
+ sum_ref: 16.872337\
+ sum: 16.691491
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\ul Server: cuda4(16 cores, , 2.30 GHz)\ulnone \
+N = 100\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1 \cf2 \cb3 \CocoaLigature0 GPU Bandwidth = 0.000683 GB/s\
+Error = 0.180076\
+ sum_ref: 16.872337\
+ sum: 16.692261
+\f0 \cf0 \cb1 \CocoaLigature1 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\
+3) Project proposal:\
+\
+For my final project I have decided I think I like the idea of working on doing the K-Means using CUDA or another parallelization method discussed. I have a few different data sets in mind that I have used in the past and am in a data science course this semester where we have used K-means (in python). I think trying to implement this in parallel would be an interesting task having used it before in the past.\
+\
+It is also possible that I may be working with a partner 
+\f2\b Abrar Ahmed
+\f0\b0 , where we we would be working on parallelizing the Floyd Warshall all pairs shortest paths problem. This potential collaboration was just discussed this morning, which is why as of now I am also proposing a solo project.\
+\
+\
+\
+\
+\
+\
+\
+}
