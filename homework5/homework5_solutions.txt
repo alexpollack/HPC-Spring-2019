@@ -4,7 +4,24 @@ HPC Spring 2019
 
 Q1)
 
+__________________________________________________________________________________
+For the single integer being passed in a ring it appears that for 100 repeats, 5 processors gave optimal latency, for 10000 and 100000, 10 gave the optimal latency. 
+
+For passing an array of size 2MBytes, it seemed that for 100, 10000, 100000 repeats 
+three processors gave optimal bandwidth, all though for all 3 and 4 were relatively
+close.
+__________________________________________________________________________________
+
+
+_________________________________________
+
+		Latency
+_________________________________________
+
+N = Number of repeats
+
 Ring for a single integer = 0, ran on crunchy1:
+_________________________________________
 N = 100000
 10 processors:
 	Ring latency: 8.209551e-03 ms
@@ -46,4 +63,52 @@ N = 100
 3 processors:
 	Ring latency: 5.431569e-03 ms
 	Final: Process 0 ended with 300
+
+
+_________________________________________
+
+		Bandwidth
+_________________________________________
+
+Ring for an array of 2MBytes (Nsize = 2000000)
+data[2] = 1, ran on crunchy1:
+_________________________________________
+N = 100000
+15 processors:
+	Ring bandwidth: 2.779613e+01 GB/s
+10 processors:
+	Ring bandwidth: 6.422495e+01 GB/s
+5 processors:
+	Ring bandwidth: 1.650247e+02 GB/s
+4 processors:
+	Ring bandwidth: 2.217211e+02 GB/s
+3 processors:
+	Ring bandwidth: 3.843742e+02 GB/s
+_________________________________________
+N = 10000
+15 processors:
+	Ring bandwidth: 3.381262e+01 GB/s
+10 processors:
+	Ring bandwidth: 7.057140e+01 GB/s
+5 processors:
+	Ring bandwidth: 1.727949e+02 GB/s
+4 processors:
+	Ring bandwidth: 1.881224e+02 GB/s
+3 processors:
+	Ring bandwidth: 2.810022e+02 GB/s
+_________________________________________
+
+N = 100
+15 processors:
+	Ring bandwidth: 3.483977e+00 GB/s
+10 processors:
+	Ring bandwidth: 2.811182e+01 GB/s
+5 processors:
+	Ring bandwidth: 8.364413e+01 GB/s
+4 processors:
+	Ring bandwidth: 1.114436e+02 GB/s
+3 processors:
+	Ring bandwidth: 1.477415e+02 GB/s
+_________________________________________
+
 

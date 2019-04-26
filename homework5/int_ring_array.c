@@ -10,7 +10,11 @@
 
 int main(int argc, char **argv)
 {
-  int world_rank, world_size, data = 0, N = 10000; // N = number of repeats
+  int world_rank, world_size, N = 100000; // N = number of repeats
+  long Nsize = 1000000; // 2MBytes, will b int, from pingpong code.
+
+  char* data = (char*) malloc(Nsize);
+  for (long i = 0; i < Nsize; i++) data[i] = 1;
 
   MPI_Init(&argc , &argv);
   MPI_Status status;
@@ -18,8 +22,10 @@ int main(int argc, char **argv)
   MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
   MPI_Comm_size(MPI_COMM_WORLD, &world_size);
 
-  if (world_rank == 0)
+  if (world_rank == 0) {
+    printf("\nNsize = %d\n", Nsize);
     printf("\nN = %d\n", N);
+  }
 
   double tt = MPI_Wtime();
   for(int i = 0; i < N; i++)
@@ -28,12 +34,10 @@ int main(int argc, char **argv)
     {
       MPI_Send( &data, 1, MPI_INT, world_rank + 1, 0, MPI_COMM_WORLD);
       MPI_Recv( &data, 1 , MPI_INT, world_size-1, 0, MPI_COMM_WORLD, &status);
-      data += world_size - 1;
     }
     else
     {
       MPI_Recv( &data, 1 , MPI_INT, world_rank - 1, 0, MPI_COMM_WORLD, &status);
-      data += world_rank - 1;
       if ( world_rank < world_size - 1) {
         MPI_Send( &data, 1, MPI_INT, world_rank + 1, 0, MPI_COMM_WORLD);
       }
@@ -41,22 +45,21 @@ int main(int argc, char **argv)
         MPI_Send( &data, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
         
     }
-    // Print out what gets what from where (only ideal if # of repeats isn't large)
     /*if (world_rank == 0)
       printf("Process %d got %d from %d\n", world_rank, data, world_size-1);
     else
       printf("Process %d got %d from %d\n", world_rank, data, world_rank-1);*/
   }
+
+  
   tt = MPI_Wtime() - tt;
-  if (!world_rank) printf("\nRing latency: %e ms\n", tt/N * 1000);
+  if (!world_rank) printf("\nRing bandwidth: %e GB/s\n", (Nsize*N)/tt/1e9);
   MPI_Finalize();  
 
   if (world_rank == 0)
-    printf("\nFinal: Process 0 ended with %d\n\n", data); // Print what the root process 0 ended up with as thats the end of the ring
+    printf("\nDone.\n");
   return 0;
 }
-
-
 
 
 
