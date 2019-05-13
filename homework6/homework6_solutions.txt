@@ -1,0 +1,52 @@
+HPC HW 6
+Alexander Pollack
+
+Q0) 
+_____________________________________________________________________________
+
+Project: Creating a High-Performance Floyd-Warshall All Pairs Shortest Path
+
+Alexander Pollack and Abrar Ahmed
+_____________________________________________________________________________
+
+05/06-05/12: Alex, Abrar
+
+Fixed problem in OpenMP code, tested with randomized graphs and compared timings with serial.
+_____________________________________________________________________________05/13-05/19: Alex, Abrar
+
+Last bit of fine tuning onto the code, work on  writing up presentation slides and report.
+_____________________________________________________________________________
+05/20: Alex, Abrar
+
+Signed up to present on Monday, 5/20 from 5:30 to 5:40 pm.
+_____________________________________________________________________________
+
+Q1) MPI-parallel two-dimensional Jacobi smoother
+
+N = 512, lN = 8, p = 64
+
+Time elapsed is 0.593873 seconds.
+
+N = 1024, lN: 64, p = 64
+
+Time elapsed is 0.202850 seconds.
+
+N = 2048, lN = 32, p = 64
+
+Time elapsed is 1.043524 seconds.
+
+N = 4096, lN = 64, p = 64
+
+Time elapsed is 1.883603 seconds.
+
+
+N = 64, lN = 8, p = 8
+
+Time elapsed is 0.002618 seconds.
+
+
+_____________________________________________________________________________
+
+Q2)
+
+Had some issues with the alltoallv in the ssort code.
